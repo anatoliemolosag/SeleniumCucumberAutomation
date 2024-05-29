@@ -37,7 +37,7 @@ public class LoginPage {
 
     public void loginFunctionality() throws InterruptedException {
 
-        emailInputBox.sendKeys("hello@gmail.com");
+        emailInputBox.sendKeys("test@gmail.com");
         passwordInputBox.sendKeys("12345678");
 
 
