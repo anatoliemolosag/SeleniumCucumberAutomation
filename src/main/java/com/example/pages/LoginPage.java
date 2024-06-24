@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class LoginPage {
 
@@ -21,44 +22,35 @@ public class LoginPage {
     }
 
 
-    @FindBy(id = "email")
-    private WebElement emailInputBox;
+    @FindBy(xpath = "//input[@type=\"text\"]")
+    private WebElement searchBox;
+
+    @FindBy(xpath = "//input[@type=\"submit\"]")
+    private WebElement searchButton;
+
+//    @FindBy(xpath = "//div[@id=\"srp-river-results\"]//li//a")
+//    private List<WebElement> elements;
+
+    @FindBy(xpath = "/html/body/div[5]/div[4]/div[3]/div[1]/div[3]/ul/li")
+    private List<WebElement> elements;
 
 
-    @FindBy(name = "password")
-    private WebElement passwordInputBox;
 
-    @FindBy(xpath = "//button[@class=\"MuiButtonBase-root MuiButton-root MuiButton-contained WithStyles(ForwardRef(Button))-root-38 MuiButton-containedPrimary\"]")
-    private WebElement signInButton;
-    @FindBy(xpath = "//*[@class=\"Toastify__toast Toastify__toast--error\"]")
-    private WebElement errorMessage;
+    public void searchFunctionality(String text) throws InterruptedException {
+        searchBox.sendKeys(text);
 
 
-
-    public void loginFunctionality() throws InterruptedException {
-
-        emailInputBox.sendKeys("test@gmail.com");
-        passwordInputBox.sendKeys("12345678");
-
-
-        //To be removed
-//        Wait<WebDriver> wait = new FluentWait<>(driver)
-//                .pollingEvery(Duration.ofSeconds(2))
-//                        .withMessage("Sign In button")
-//                                .withTimeout(Duration.ofSeconds(10))
-//                                        .ignoring(Exception.class);
-//        wait.until(mydriver->signInButton);
-//        Actions actions = new Actions(driver);
-//        actions.click(signInButton).perform();
-
-        Thread.sleep(5000);
-        signInButton.click();
     }
 
-    public String getErrorMessage(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(errorMessage));
+    public void clickSearchButton(){
+        searchButton.click();
+    }
 
-        return errorMessage.getText();
+    public String getTitle(){
+        return driver.getTitle();
+    }
+
+    public List<WebElement> getElements() {
+        return elements;
     }
 }
